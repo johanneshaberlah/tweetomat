@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.github.johanneshaberlah.tweetomat.proto";
+option java_outer_classname = "PartyProto";
+
+package tweetomat.party;
+
+service PartyService {
+  rpc PersistPartyWord (PartyWordPersistRequest) returns (PartyWordResponse);
+  rpc FindPartyBy (PartyRequest) returns (PartyResponse);
+  rpc PersistParty (PartyPersistRequest) returns (PartyResponse);
+  rpc AnalyseWords (WordAnalyseRequest) returns (PartyResponse);
+}
+
+enum ErrorCode {
+  SUCCESS = 0;
+  ERROR = 1;
+}
+
+message WordAnalyseRequest {
+  repeated string words = 1;
+}
+
+message PartyRequest {
+  int64 id = 1;
+  string name = 2;
+}
+
+message PartyPersistRequest {
+  string name = 1;
+}
+
+message PartyWordPersistRequest {
+  PartyResponse partyResponse = 1;
+  string text = 2;
+}
+
+message PartyWordResponse {
+  int64 id = 1;
+  PartyResponse partyResponse = 2;
+  string text = 3;
+  ErrorCode errorCode = 4;
+}
+
+message PartyResponse {
+  int64 id = 1;
+  string name = 2;
+  repeated PartyWordResponse partyWords = 3;
+  ErrorCode errorCode = 4;
+}

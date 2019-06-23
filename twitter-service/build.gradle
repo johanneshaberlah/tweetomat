@@ -1,0 +1,23 @@
+plugins {
+  id 'org.springframework.boot' version '2.1.6.RELEASE'
+  id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.github.johanneshaberlah.tweetomat'
+version = '0.0.1'
+sourceCompatibility = '1.8'
+
+repositories {
+  mavenCentral()
+  mavenLocal()
+}
+
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter'
+  compile 'io.github.lognet:grpc-spring-boot-starter:3.2.0'
+  compile 'com.github.johanneshaberlah.tweetomat:proto:1.0.0'
+  compile 'org.twitter4j:twitter4j-core:4.0.6'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

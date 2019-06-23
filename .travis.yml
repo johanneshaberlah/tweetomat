@@ -1,0 +1,22 @@
+language: java
+
+jdk:
+- openjdk8
+os:
+- linux
+
+before_cache:
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+script:
+- |
+  ./gradlew sonarqube \
+    -Dsonar.projectKey=johanneshaberlah_tweetomat \
+    -Dsonar.organization=johanneshaberlah-github \
+    -Dsonar.host.url=https://sonarcloud.io \
+    -Dsonar.login=$SONAR_LOGIN
